@@ -1,0 +1,39 @@
+# Defect Log - PSVS-REQ-v1.0
+
+| Defect ID | Req ID | Category | Description | Evidence | Severity | Suggested fix | Status |
+|---|---|---|---|---|---|---|---|
+| D01 | S1 | Ambiguity | 'Registered' is undefined: who registers depositors, with what criteria, and can registration be revoked? | S1 text: 'only from registered depositors' | High | Define a Depositor Registry, registration authority, criteria and revocation rule. | Open |
+| D02 | S1 | Incompleteness | No behaviour for rejected deposits or for boxes of a depositor deregistered after depositing. | S1 covers acceptance only | Medium | Add rejection handling and a policy for boxes of deregistered depositors. | Open |
+| D03 | S2 | Vagueness | 'A large number of boxes' has no figure. | S2 text | Medium | Delete S2 or state a minimum capacity per chamber. | Open |
+| D04 | S2,S3 | Redundancy | S2 is fully superseded by the concrete limits in S3. | S2 vs S3 | Low | Merge S2 into S3. | Open |
+| D05 | S3 | Ambiguity | Capacity counted in boxes, but box size/volume is not fixed, and it is unclear whether chambers are fixed at 4 (scenario says 'several'). | S3 text vs scenario | Medium | State box dimensions or a unit-of-capacity rule and the fixed chamber list. | Open |
+| D06 | S3,S8 | Incompleteness | No rule on capacity when a chamber is under maintenance: where do its boxes go, and does the receiving chamber's limit still hold? | S3 limits vs S8 warming | Medium | Add a relocation rule that respects limits and S7. | Open |
+| D07 | S3 | Inconsistency (terminology/units) | Scenario says 'several freezer chambers'; S3 hard-codes four with different capacities. | Scenario vs S3 | Low | Use one authoritative chamber list (ID, capacity). | Open |
+| D08 | S4 | Ambiguity | 'Belongs' and 'that depositor' undefined for mergers, dissolution or delegated agents. | S4 text | High | Define ownership transfer and authorised-agent rules. | Open |
+| D09 | S4,S5 | Contradiction | S4: only the owner may withdraw; S5: authority may release any box to any party. | S4 vs S5 | Critical | Make S4 'except under S5 emergency release' and define S5 conditions. | Open |
+| D10 | S5 | Vagueness | 'Emergency' is undefined and no one is named to declare it. | S5 text | High | Define emergency criteria and the declaring body. | Open |
+| D11 | S5 | Ambiguity | 'Vault authority' is not a defined role; 'any requesting party' is unbounded. | S5 text | High | Define the role and vetting of requesters. | Open |
+| D12 | S5,S12,S4 | Incompleteness | Emergency release has no audit, owner notification, or post-release ownership rule. | S5 silent vs S4, S12 | Medium | Require logging, owner notice and chain-of-custody records. | Open |
+| D13 | S5,S10 | Contradiction | Unclear whether emergency releases count toward the owner's 20% yearly quota; both readings conflict with either S5 ('any box') or S10 ('at most'). | S5 vs S10 | High | State that emergency releases are excluded from the quota. | Open |
+| D14 | S6 | Non-verifiability | 'Safe temperature' has no numeric value, and 'safe' for what is unstated. | S6 text | High | Replace with a numeric range tied to seed species. | Open |
+| D15 | S6,S7 | Redundancy | S6 is the general form of S7; two statements to keep in sync. | S6 vs S7 | Low | Fold S6 into S7. | Open |
+| D16 | S6,S8 | Contradiction | 0C during maintenance may not be 'safe' under S6 for stored seeds. | S6 vs S8 | High | Define a bounded, authorised exception to S6. | Open |
+| D17 | S7 | Non-verifiability | 'Never' over a continuous quantity is untestable; no measurement point, sensor, tolerance or sampling interval. | S7 text | Medium | Specify sensors, sampling period and alarm threshold. | Open |
+| D18 | S7,S8 | Contradiction | S7 forbids temperatures above -18C; S8 permits 0C. | S7 vs S8 | Critical | Add 'except during authorised maintenance (S8)' with duration limit. | Open |
+| D19 | S8 | Incompleteness | No rule for boxes present during warming, maximum duration, authorisation, or notification of depositors. | S8 text | High | Require evacuation or a maximum exposure time plus approval and notice. | Open |
+| D20 | S8 | Ambiguity | 'May be warmed' is a permission with no actor, trigger, or end condition. | S8 text | Low | Rewrite as 'shall only be warmed when ...'. | Open |
+| D21 | S9 | Vagueness | 'Low viability' and 'promptly' have no threshold or time bound. | S9 text | High | State a viability % per species and a flag deadline. | Open |
+| D22 | S9 | Incompleteness | No statement of who measures viability, how often, or who is notified and acts on the flag. | S9 text | Medium | Add testing schedule, responsible role and notification. | Open |
+| D23 | S9 | Infeasibility | Viability testing is destructive and slow, so prompt flagging of every box is not physically achievable. | S9 vs seed science | Medium | Use sampling-based monitoring with a stated confidence level. | Open |
+| D24 | S9,S4,S10 | Contradiction | Regeneration needs a withdrawal; S4 allows only the owner, and S10 may block it through the 20% quota. | S9 vs S4, S10 | High | Exempt regeneration from the quota and define who may perform it. | Open |
+| D25 | S10 | Ambiguity | 'Per year' (calendar or rolling), the baseline count (start of year or current), and rounding are undefined. | S10 text | High | Define window, baseline and rounding. | Open |
+| D26 | S10,S11 | Incompleteness | Effect of redeposit on the quota count is unspecified. | S10 vs S11 | Medium | State whether redeposited boxes restore quota. | Open |
+| D27 | S10 | Untraceability | 'Species' is the quota basis, but the scenario's 'one species per box' rule is not in S1-S12. | Scenario vs S10 | Medium | Add a requirement that each box has exactly one species attribute. | Open |
+| D28 | S11 | Ambiguity | 'Re-inspection' lacks inspector, criteria and pass/fail outcome; failure handling missing. | S11 text | High | Define inspection procedure, criteria and failure path. | Open |
+| D29 | S11 | Incompleteness | Does not say the redeposit retains original ownership or must satisfy S1/S3. | S11 text | Medium | Add ownership and capacity checks to redeposit. | Open |
+| D30 | S12 | Non-verifiability | 'A good audit trail' is subjective. | S12 text | High | List events, fields (who/what/when), and completeness test. | Open |
+| D31 | S12 | Incompleteness | No retention period, tamper protection, or access control for the audit trail. | S12 text | Medium | Add retention, append-only and access rules. | Open |
+| D32 | All | Untraceability | Scenario states staff handle deposits, withdrawals and monitoring and the vault is a custodian, but no requirement defines staff roles or custodianship. | Scenario vs S1-S12 | Medium | Add role requirements and trace IDs to scenario sentences. | Open |
+| D33 | S10 | Unstated assumption | Assumes a defined set of boxes per species at a defined time; no inventory snapshot rule. | S10 text | Low | Record an annual inventory snapshot. | Open |
+
+Total: 33 defects; cross-requirement: 10 (D04, D06, D09, D12, D13, D15, D16, D18, D24, D26).
